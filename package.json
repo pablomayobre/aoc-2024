@@ -1,0 +1,28 @@
+{
+  "name": "@ts-aoc-starter/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "exec-bun": "bun run ./index.ts exec",
+    "init-bun": "bun run ./index.ts init",
+    "help-bun": "bun run ./index.ts help",
+    "exec": "tsx ./index.ts exec",
+    "init": "tsx ./index.ts init",
+    "help": "tsx ./index.ts help",
+    "format": "prettier . -w",
+    "check": "tsc --noEmit"
+  },
+  "private": true,
+  "dependencies": {
+    "@commander-js/extra-typings": "^11.1.0",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "prettier": "^3.1.0",
+    "tsx": "latest",
+    "typescript": "latest"
+  },
+  "type": "module"
+}
