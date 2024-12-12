@@ -18,15 +18,15 @@ export default class Day {
     this.sampleResult = (sampleResult ?? '').toString();
   }
 
-  async exec(file: string) {
+  async exec(file: string, isSample?: boolean) {
     const start = performance.now();
-    const result = await this.answer(file);
+    const result = await this.answer(file, isSample);
     const end = performance.now();
 
     return { result, time: end - start };
   }
 
-  async answer(input: string): Promise<string | number> {
+  async answer(input: string, isSample?: boolean): Promise<string | number> {
     throw new Error('Not implemented');
   }
 }

@@ -2,13 +2,24 @@
 
 ## Setup
 
-Firs you need to setup aoc-cli, it should be available globally and you need to have configured your session cookie.
+Firs you need to setup [aoc-cli](https://github.com/scarvalhojr/aoc-cli), it should be available globally and you need to have [configured your session cookie](https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#session-cookie-).
 
-## Init
-Initialize a day with a very basic template, puzzle description and your data
+Then you should update `wrapper.ts` with the year you wanna solve puzzles for.
 
+Run `npm install` or `pnpm install` and start solving puzzles!
+
+## Start a new day
+
+Every time you wanna solve a puzzle you will need to run the `init` command. This command will setup a very basic template, it will create a markdown file containing the puzzle description and your data as a text file.
+
+
+To do all this run the `init` command with the day you wanna initialize:
 ```shell
 npm run init -- 1
+
+# or
+
+pnpm run init 1
 ```
 
 The command above would initialize day 1 with the following folder structure
@@ -24,9 +35,10 @@ puzzles
 
 ## Save your sample data
 
-I recommend you first read the puzzle, grab the sample data generally presented as a code block and paste it into `part-a.sample-data.txt`.
+I recommend you first read the puzzle, grab the sample data generally presented as a code block and paste it into `part-a.sample-data.txt`. 
 
-There will also be an expected result that you will need to store in `part-a.ts`
+The puzzle will (very likely) give you the answer for that sample data, this value should be set in `sampleResult` inside of your `part-a.ts` template.
+
 
 ## Write your answer
 
@@ -46,7 +58,7 @@ export default class Day1A extends Day {
   }
 
   async answer(input: string) {
-    const list = input.split('\n').map(value => parseInt(value));
+    const list = input.trim().split('\n').map(value => parseInt(value));
 
     return list.reduce((a, b) => a + b);
   }
@@ -58,12 +70,15 @@ export default class Day1A extends Day {
 You can then test your answer using the following command:
 
 ```shell
-npm run exec -- 1 A --sample
-
-# or
-
 npm run exec -- 1 A -s
+
+# or 
+
+pnpm run exec 1 A -s
 ```
+
+> Note:
+> `-s` is shorthand for `--sample`
 
 This will run the code for Day 1 part 1 (internally called challenge A) against the sample data.
 
@@ -82,12 +97,15 @@ This will run the code for Day 1 challenge A, against the input data, submit the
 If you want to test against input data without submitting your answer, you can use the following command
 
 ```shell
-npm run exec -- 1 A --dont-submit
+npm run exec -- 1 A -n
 
 # or
 
-npm run exec -- 1 A -n
+pnpm run exec 1 A -n
 ```
+
+> Note:
+> `-n` is shorthand for `--dont-submit`
 
 Solving challenge A, will automatically update your `puzzle.md` and create a new `part-b.ts` for you to advance into the second part of the puzzle, also known as challenge B.
 
@@ -102,6 +120,22 @@ npm run format
 # Typecheck
 npm run check
 ```
+
+## Bun
+
+All this commands mentioned in this README have their `bun` equivalents:
+
+```shell
+# pnpm run init 1
+pnpm run init-bun 1
+
+# pnpm run exec 1 A -s
+pnpm run exec-bun 1 A -s
+```
+
+Please note that the template is compatible with Bun, it will be up to you to make sure your solutions also work with it.
+
+The performance improvement is nice, so I recommend this.
 
 ## Configure the year
 

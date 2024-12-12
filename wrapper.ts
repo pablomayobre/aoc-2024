@@ -4,7 +4,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import chalk from 'chalk';
 
-export const YEAR = 2023;
+export const YEAR = 2024;
 
 const execute = promisify(exec);
 
@@ -22,18 +22,19 @@ export default class Day${day}${challenge} extends Day {
     super({
       day: ${day},
       challenge: "${challenge}",
-      
+
       // The result of the algorithm using sample data
-      sampleResult: null 
+      sampleResult: null
     })
   }
 
-  async answer(input: string) {
+  async answer(input: string, isSample?: boolean) {
     // Write your code here
 
+    const result = 0; // TODO: Calculate the actual result
 
     // Return your result
-    return 0; 
+    return result;
   }
 }
 `;
@@ -117,18 +118,20 @@ export async function executeDay(
       ? `part-${challenge.toLowerCase()}.sample-data`
       : 'data';
 
-    if (! await exists(`${path}/${fileName}.txt`)) {
-      await downloadData(dayNumber, challenge)
-      
+    if (!(await exists(`${path}/${fileName}.txt`))) {
+      await downloadData(dayNumber, challenge);
+
       if (useSampleData) {
-        console.log("You will need to fill in your sample data before executing this challenge.")
+        console.log(
+          'You will need to fill in your sample data before executing this challenge.',
+        );
         return;
       }
     }
 
     const file = (await readFile(`${path}/${fileName}.txt`)).toString();
 
-    const { result, time } = await instance.exec(file);
+    const { result, time } = await instance.exec(file, useSampleData);
 
     console.log(chalk.bold(`Your answer was: ${chalk.inverse(` ${result} `)}`));
     console.log(`Execution time: ${time}ms`);
@@ -173,10 +176,12 @@ export async function executeDay(
       );
     }
   } else {
-    await downloadData(dayNumber, challenge)
-      
-    console.log("The day you tried to execute didn't exist so we created it for you.")
-    console.log("Fill your answer and execute it once more.")
+    await downloadData(dayNumber, challenge);
+
+    console.log(
+      "The day you tried to execute didn't exist so we created it for you.",
+    );
+    console.log('Fill your answer and execute it once more.');
   }
 }
 

@@ -41,6 +41,9 @@ Thumbs.db
 .nx/cache
 
 # Advent of code data
+# DON'T EVER POST THESE FILES TO GITHUB
+# They belong to the Advent of Code website
+# The repository should only contain your solution to the puzzles not the puzzles themselves
 puzzle.md
 data.txt
 *.sample-data.txt
